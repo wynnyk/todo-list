@@ -52,12 +52,12 @@ addProject.addEventListener('click', openProjectForm);
 cancelButton.addEventListener('click', closeProjectForm);
 
 function openProjectForm() {
-  document.getElementById("projectForm").style.display = "flex";
+  document.querySelector(".project-popup").style.display = "flex";
   overlay.style.display = "block";
 }
 
 function closeProjectForm() { //closes form and clears previous content
-  document.getElementById("projectForm").style.display = "none";
+  document.querySelector(".project-popup").style.display = "none";
   overlay.style.display = "none";
   document.getElementById("projectInput").value = "";
 }
