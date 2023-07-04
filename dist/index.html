@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="content">
+    <header><h1>ToDoDoot</h1></header>
+    <nav class="nav">
+        <ul>
+            <li class="inbox"><img src="icons/inbox.svg" alt="Inbox">Inbox</li>
+            <li class="today"><img src="icons/today.svg" alt="Inbox">Today</li>
+            <li class="week"><img src="icons/week.svg" alt="Inbox">Week</li>
+        </ul>
+        <div class="projectBox">
+            <h2 class="projectTitle">Projects</h2>
+            <button class="addProject"><p>+</p></button>
+        </div>
+        <div class="project-popup" id="projectForm">
+            <form action="" class="project-form-container">
+              <h1>Add New Project</h1>
+                
+              <label for="projectInput">Project Name:</label>
+              <input type="text" name="projectInput" id="projectInput" required>
+          
+              <button type="submit" class="btn" id="submitProject">Add</button>
+              <button type="button" class="btn cancel" id="cancelProject">Close</button>
+            </form>
+          </div>
+        <ul class="projects" id="projects">
+            <li class="project"><img src="icons/project.svg" alt="Project"><p class="projectName">Test Project</p><button class="deleteProject">X</button></li>
+        </ul>
+    </nav>
+    <main class="main">
+        <div id="overlay"></div>
+        <div class="mainBox">
+            <h2 id="mainTitle">Inbox</h2>
+            <div class="items" id="items">
+            </div>
+            <button class="addTask"><p>+</p> Add Task</button>
+        </div>
+        <div class="task-popup" id="myForm">
+            <form action="" class="task-form-container">
+              <h1>Add New Task</h1>
+          
+              <input type="text" placeholder="Task name" name="taskName" class="taskName" id="taskName" required>
+          
+              <input type="text" placeholder="Description" name="details" id="details">
+
+              <label for="due-date">Due Date:</label>
+                <input type="date" id="due-date" name="due-date">
+              
+              <div class="Priority">
+                    <label for="priority">Priority:</label>
+                        <select id="priority" name="priority">
+                        <option value="high">High</option>
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                    </select>
+              </div>
+                
+              <button type="submit" class="btn" id="submitTask">Add Task</button>
+              <button type="button" class="deleteTask" id="cancel">Close</button>
+            </form>
+          </div>
+          <div class="edit-popup" id="editForm">
+            <form action="" class="edit-form-container">
+                <h1>Edit Task</h1>
+          
+                <input type="text" placeholder="Task name" name="taskName" class="taskName" id="editTaskName" required>
+          
+                <input type="text" placeholder="Description" name="details" id="editDetails">
+          
+                <label for="edit-due-date">Due Date:</label>
+                <input type="date" id="edit-due-date" name="edit-due-date">
+          
+                <div class="Priority">
+                  <label for="priority">Priority:</label>
+                  <select id="priority" name="priority">
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                  </select>
+                </div>
+          
+                <button type="submit" class="btn" id="submitEdit">Edit Task</button>
+                <button type="button" class="deleteTask" id="cancelEdit">Close</button>
+              </form>
+          </div>
+    </main>
+    <script src="main.js"></script>
+</div>
+</body>
+</html>
