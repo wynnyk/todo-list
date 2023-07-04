@@ -37,7 +37,7 @@ createProject("One");
 createProject("Two");
 createProject("Three");
 createProject("Four");
-myProjects[0].addTodoItem('Inbox Test', 'Inbox Details', "2023-07-05", 'High')
+myProjects[0].addTodoItem('Inbox Test', 'Inbox Details', "2023-07-05", "low")
 console.log(myProjects);
 
 let selectedProject = myProjects[0];
@@ -69,6 +69,7 @@ document.querySelector(".project-form-container").addEventListener("submit", fun
   createProject(projectInput);
   console.log(myProjects);
   updateProjectList()
+  saveProjects();
 });
 
 let projectsList = document.getElementById('projects');
@@ -99,6 +100,7 @@ function updateProjectList() {
         let index = myProjects.indexOf(obj);
         myProjects.splice(index, 1);
         delButton.parentNode.remove()
+        saveProjects();
     });
     newItem.appendChild(delButton);
   })
@@ -127,7 +129,7 @@ function closeTaskForm() { //closes form and clears previous content
   document.getElementById("due-date").value = "";
 }
 
-//Edit open/close/submiy
+//Edit open/close/submit
 
 function closeEditForm() {
   document.getElementById("editForm").style.display = "none";
@@ -148,6 +150,7 @@ submitEdit.addEventListener('click', (event) => {
   selectedProject.todoItems[selectedTaskIndex].duedate = editedDueDate;
   updateTaskList(selectedProject);
   closeEditForm();
+  saveProjects();
 });
 
   //gets information for task items and pushes once submitted
@@ -160,6 +163,7 @@ submitEdit.addEventListener('click', (event) => {
     closeTaskForm();
     selectedProject.addTodoItem(taskName, details, duedate, priority);
     updateTaskList(selectedProject)
+    saveProjects();
 });
 
 let taskList = document.getElementById('items');
@@ -196,6 +200,7 @@ function updateTaskList(currentProject) {
     
     let details = document.createElement('p');
     details.textContent = obj.details;
+    details.classList.add('details');
     taskMainDiv.appendChild(details);
     
     let duedate = document.createElement('p');
@@ -214,6 +219,7 @@ function updateTaskList(currentProject) {
       document.getElementById("editTaskName").value = obj.task;
       document.getElementById("editDetails").value = obj.details;
       document.getElementById('edit-due-date').value = obj.duedate;
+      document.getElementById('edit-priority').value = obj.priority;
       document.getElementById("editForm").style.display = "flex";
       overlay.style.display = "block";
     })
@@ -226,6 +232,7 @@ function updateTaskList(currentProject) {
         let index = currentProject.todoItems.indexOf(obj);
         currentProject.todoItems.splice(index, 1);
         deleteTask.parentNode.remove()
+        saveProjects();
     });
     newTask.appendChild(deleteTask);
   });
@@ -282,4 +289,41 @@ today.addEventListener('click', () => {
 })
 
 //Defaults to inbox on start
-selectInbox();
+
+
+//Saving and retreiving from storage
+function saveProjects() {
+localStorage.setItem('myProjects', JSON.stringify(myProjects));
+}
+
+//const storedProjects = localStorage.getItem('myProjects');
+document.addEventListener('DOMContentLoaded', () => {
+  // Retrieve saved projects from local storage
+  const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
+
+  // Check if there are saved projects
+  if (storedProjects) {
+    // Clear existing projects if any
+    myProjects.length = 0;
+
+    // Add saved projects to myProjects array
+    storedProjects.forEach((storedProject) => {
+      const project = new Project(storedProject.title);
+      storedProject.todoItems.forEach((storedTodoItem) => {
+        const todoItem = new ToDoItem(
+          storedTodoItem.task,
+          storedTodoItem.details,
+          storedTodoItem.duedate,
+          storedTodoItem.priority
+        );
+        project.todoItems.push(todoItem);
+      });
+      myProjects.push(project);
+    });
+
+    // Update the project list and select the inbox project
+    updateProjectList();
+    selectInbox();
+  }
+});
+

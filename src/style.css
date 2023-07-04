@@ -168,15 +168,65 @@ nav ul li:hover {
 }
 
 .project-popup {
-    display: none;
     position: fixed;
-    flex-direction: column;
-    justify-content: space-between;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 3px solid #f1f1f1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 10000;
+  }
+  
+  .project-form-container {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  .project-form-container h1 {
+    margin-top: 0;
+  }
+  
+  .project-form-container label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .project-form-container input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .project-form-container button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .project-form-container button.btn {
+    background-color: #4caf50;
+  }
+  
+  .project-form-container button.cancel {
+    background-color: #f44336;
+  }
+  
+  .project-form-container button.btn:hover,
+  .project-form-container button.cancel:hover {
+    opacity: 0.8;
   }
 
   .task-popup, .edit-popup {
@@ -244,7 +294,7 @@ nav ul li:hover {
   }
   
   .task-form-container #priority,
-  .edit-form-container #priority {
+  .edit-form-container #edit-priority {
     width: 100%;
     margin-bottom: 10px;
   }
@@ -282,20 +332,33 @@ nav ul li:hover {
 
 .duedate {
     align-self: center;
+    opacity: 0.5;
+    color: #1a6c61;
 }
 
 .edit, .delete {
     height: 10%;
-    padding: 4px 5px;
+    padding: 8px 16px;
     align-self: center;
-    margin-left: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.edit:hover,
+.delete:hover {
+  filter: brightness(120%);
+  box-sizing: border-box;
+  padding: 7px 15px;
+  border: 1px solid white;
+  border-color: black;
 }
 
 .edit {
-    background-color: goldenrod;
+    background-color: rgb(248, 201, 81);
 }
 
 .delete {
-    background-color: firebrick;
+    background-color: #f44336;
 }
 
